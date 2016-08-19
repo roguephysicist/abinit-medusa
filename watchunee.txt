@@ -1,0 +1,13 @@
+watchu nee
+=========================
+
+1. FFTW (2016)
+2. FFTW (2013)
+3. ABINIT 8.0.8 (2016)
+4. ABINIT 5.7.3 (2013)
+5. PETSC 3.4.3 (2013)
+6. SLEPC 3.4.3 (2013)
+7. DP-5.2.99-r1883 (2013)
+
+
+./configure --prefix=/home/sma/test/bin/fftw-3.3.5-intel16.2.181 CC=icc F77=ifort MPICC=mpiicc --enable-mpi --enable-fma CFLAGS="-O3" FFLAGS="-O3" && make && make install

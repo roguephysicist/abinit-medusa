@@ -1,0 +1,36 @@
+## rlayer.sh
+# @114
+echo $ztot > .slab_height
+
+
+## responses.sh
+# @61
+if [ -f ".slab_height"]; then
+    ztot=$(cat ".slab_height")
+fi
+# @395
+echo "ztot= ${ztot}," >> tmp_$pfix 
+
+## inparams.f90
+# @36
+REAL(DP) :: ztot             ! total slab size for normalization of calImChi1
+# @250
+NAMELIST/INDATA/ztot
+# @323
+WRITE(*,*) "ztot ", ztot
+
+## integrands.f90
+# @7
+USE inparams, ONLY : acellz, ztot
+# @563
+!! Normalization
+ctmp=(acellz/ztot)*ctmp
+
+## responses.sh
+# @686
+if [[ $response == '21' || $response == '22' || $response == '3' || $response == '42' || $response == '43' || $response == '44' || $response == '45' ]]; then
+    $TINIBA/kk/rkramer 2 $sname.$ij.$spe'_'$pfix $sname.$ij.kk.$spe'_'$pfix >> hoy_$ij'_'$pfix
+else
+    $TINIBA/kk/rkramer 1 $sname.$ij.$spe'_'$pfix $sname.$ij.kk.$spe'_'$pfix >> hoy_$ij'_'$pfix
+    #$TINIBA/kk/rkramer_$exec 1 $sname.$ij.$spe'_'$pfix $sname.$ij.kk.$spe'_'$pfix >> hoy_$ij'_'$pfix
+fi

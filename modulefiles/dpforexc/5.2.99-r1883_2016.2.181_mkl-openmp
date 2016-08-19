@@ -1,0 +1,23 @@
+#%Module######################################################################
+##
+##      python modulefile
+##
+proc ModulesHelp { } {
+        puts stderr "Sets up the paths you need to use dp"
+}
+
+set sys         [uname sysname]
+set arch        [uname machine]
+
+set base_path   /opt/bin/dpforexc
+set version     5.2.99-r1883_2016.2.181_mkl-openmp 
+
+if { $sys == "Linux" } {
+   set path $base_path/$version
+
+   prepend-path PATH $path/bin
+   module load intel-compilers/16.2.181 intel-mkl/16.2.181 petsc/3.4.3_2016.2.181_mkl fftw/3/3.3.4_2016.2.181 
+   
+   setenv KMP_STACKSIZE 5g  
+
+}

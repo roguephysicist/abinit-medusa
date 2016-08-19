@@ -1,0 +1,45 @@
+#%Module
+##
+#
+set _module_name  [module-info name]
+proc ModulesHelp {} {
+  puts stderr "The $_module_name modulefile defines paths and environment"
+  puts stderr "variables needed to use Intel MPI"
+}
+
+set SWTOP /opt/intel/compilers_and_libraries_2016.1.150/linux/mpi
+
+# mach is set to one of {ia64, i686, i386, ...}
+set mach       [uname machine]
+
+####    C_INCLUDE_PATH        used by gcc and Intel C (implies -I)
+####    CPLUS_INCLUDE_PATH    used by g++ and Intel C++ (implies -I)
+####    FPATH                 used by Intel Fortran (implies -I)
+####    LIBRARY_PATH          used by link step (implies -L)
+####    LD_LIBRARY_PATH       used by runtime linker
+####    PATH                  location of mpirun command
+
+
+if { $mach == "x86_64" } {
+    set SWDIR $SWTOP/intel64
+    prepend-path    LIBRARY_PATH        $SWDIR/lib
+    prepend-path    LD_LIBRARY_PATH     $SWDIR/lib
+    prepend-path    PATH                $SWDIR/bin
+    prepend-path    C_INCLUDE_PATH      $SWDIR/include
+    prepend-path    FPATH               $SWDIR/include
+    prepend-path    CPATH               $SWDIR/include
+    prepend-path    CPLUS_INCLUDE_PATH  $SWDIR/include
+} else {
+    set SWDIR $SWTOP/intel64
+    prepend-path    LIBRARY_PATH        $SWDIR/lib
+    prepend-path    LD_LIBRARY_PATH     $SWDIR/lib
+    prepend-path    PATH                $SWDIR/bin
+    prepend-path    C_INCLUDE_PATH      $SWDIR/include
+    prepend-path    FPATH               $SWDIR/include
+    prepend-path    CPATH               $SWDIR/include
+    prepend-path    CPLUS_INCLUDE_PATH  $SWDIR/include
+}
+
+prepend-path	INTEL_MPI_PATH      $SWDIR
+setenv    	I_MPI_ROOT		$SWTOP
+prepend-path	INTEL_LICENSE_FILE      /opt/intel/licenses/license.lic

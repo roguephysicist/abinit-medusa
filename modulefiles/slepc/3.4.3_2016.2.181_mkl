@@ -1,0 +1,28 @@
+#%Module######################################################################
+##
+##      python modulefile
+##
+proc ModulesHelp { } {
+        puts stderr "Sets up the paths you need to use slepc"
+}
+
+set sys         [uname sysname]
+set arch        [uname machine]
+
+set base_path   /opt/bin/slepc
+set version     3.4.3_2016.2.181_mkl 
+
+if { $sys == "Linux" } {
+   set path $base_path/$version
+
+#   prepend-path LD_LIBRARY_PATH  $path/lib
+#   prepend-path LIBRARY_PATH $path/lib
+#   prepend-path PATH $path/bin
+#   prepend-path    PETSC_INC_DIR        $path/include
+#   prepend-path    PETSC_LIB_DIR        $path/lib
+#   prepend-path    MANPATH            $path/share/man
+#   prepend-path    INFOPATH            $path/share/info
+   setenv          SLEPC_ROOT           $path 
+   setenv          SLEPC_DIR           $path 
+
+}
