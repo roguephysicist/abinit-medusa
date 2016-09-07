@@ -11,3 +11,16 @@ watchu nee
 
 
 ./configure --prefix=/home/sma/test/bin/fftw-3.3.5-intel16.2.181 CC=icc F77=ifort MPICC=mpiicc --enable-mpi --enable-fma CFLAGS="-O3" FFLAGS="-O3" && make && make install
+
+module load intel-compilers/16.2.181 intel-mpi/5.1.3.181 intel-mkl/16.2.181
+CC=""; CXX=""; FC=""; F77=""
+
+sed -i -e 's/vec-report0/qopt-report=0/g' configure
+time make multi multi_nprocs=8
+../tests/runtests.py -j4 -n4 paral
+
+
+# Where we at
+1. Abinit 8.0.8 works like a motherfuckin boss with mkl and fftw, but no TINIBA. Left at -O3 for now.
+2. Optimizing 7.10.5, then adding mkl and fftw. seems like -O3 doesn't work, but O2 is probably fine.
+3. Put your working version of TINIBA in version control

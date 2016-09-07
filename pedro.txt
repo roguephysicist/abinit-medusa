@@ -1,1 +1,0 @@
-ask pedro about export OMP_STACKSIZE=1G!!
