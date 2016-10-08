@@ -135,12 +135,12 @@ CC="mpiicc"
 
 # C compiler custom optimization flags (when enable_optim=yes)
 #
-# CFLAGS_OPTIM="-axCORE-AVX2,-axSSE4.2 -ip -shared-intel -mcmodel=small -fma -fp-model precise"
-CFLAGS_OPTIM="-O3"
+CFLAGS_OPTIM="-axCORE-AVX2,SSE4.2 -O2 -ip -mcmodel=small -shared-intel -fp-model precise -fma"
+# CFLAGS_OPTIM="-O2"
 
 # C compiler additional custom flags
 #
-# CFLAGS_EXTRA="-qopt-report=0"
+# CFLAGS_EXTRA="-mkl=parallel"
 
 # Forced C compiler flags
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
@@ -221,12 +221,12 @@ CXX="mpiicpc"
 
 # C++ compiler custom optimization flags (when enable_optim=yes)
 #
-# CXXFLAGS_OPTIM="-axCORE-AVX2,-axSSE4.2 -ip -shared-intel -mcmodel=small -fma -fp-model precise"
-CXXFLAGS_OPTIM="-O3"
+CXXFLAGS_OPTIM="-axCORE-AVX2,SSE4.2 -O2 -ip -mcmodel=small -shared-intel -fp-model precise -fma"
+# CXXFLAGS_OPTIM="-O2"
 
 # C++ compiler additional custom flags
 #
-# CXXFLAGS_EXTRA="-qopt-report=0"
+# CXXFLAGS_EXTRA="-mkl=parallel"
 
 # Forced C++ compiler flags
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
@@ -314,12 +314,12 @@ F77="mpiifort"
 
 # Fortran compiler custom optimization flags (when enable_optim=yes)
 #
-# FCFLAGS_OPTIM="-axCORE-AVX2,-axSSE4.2 -ip -shared-intel -mcmodel=small -fma -fp-model precise"
-FCFLAGS_OPTIM="-O3"
+FCFLAGS_OPTIM="-axCORE-AVX2,SSE4.2 -O2 -ip -mcmodel=small -shared-intel -fp-model precise -fma"
+# FCFLAGS_OPTIM="-O2"
 
 # Fortran compiler additional custom flags
 #
-# FCFLAGS_EXTRA="-qopt-report=0"
+# FCFLAGS_EXTRA="-mkl=parallel"
 
 # Forced Fortran compiler flags
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
@@ -771,15 +771,15 @@ enable_connectors="yes"
 #   * By default, Abinit will use the internal Goedecker FFT library
 #   * This connector is highly experimental - USE AT YOUR OWN RISKS!
 #
-# with_fft_flavor="fftw3"
+with_fft_flavor="fftw3"
 
 # Include flags for the FFT library (default is unset)
 #
-# with_fft_incs="-I/opt/science/bin/fftw-3.3.5-intel16.2.181/include"
+with_fft_incs="-I/opt/science/bin/fftw-3.3.5-intel16.2.181-optim/include"
 
 # Link flags for the FFT library (default is unset)
 #
-# with_fft_libs="-L/opt/science/bin/fftw-3.3.5-intel16.2.181/lib -lfftw3 -lfftw3f -lfftw3_mpi -lfftw3f_mpi"
+with_fft_libs="-L/opt/science/bin/fftw-3.3.5-intel16.2.181-optim/lib -lfftw3 -lfftw3f -lfftw3_mpi -lfftw3f_mpi"
 
 # ---------------------------------------------------------------------------- #
 # Linear algebra connector                                                     #
@@ -858,11 +858,11 @@ enable_connectors="yes"
 
 # Include flags for the external linear algebra libraries (default is unset)
 #
-# with_linalg_incs="-I/opt/intel/compilers_and_libraries_2016.2.181/linux/mkl/include/intel64/lp64 -I/opt/intel/compilers_and_libraries_2016.2.181/linux/mkl/include"
+# with_linalg_incs="-I/opt/intel/compilers_and_libraries_2016.2.181/linux/mkl/include"
 
 # Link flags for the external linear algebra libraries (default is unset)
 #
-# with_linalg_libs="-L/opt/intel/compilers_and_libraries_2016.2.181/linux/mkl/lib/intel64 -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lmkl_blacs_openmpi_lp64 -lpthread -lm -ldl"
+# with_linalg_libs="-L/opt/intel/compilers_and_libraries_2016.2.181/linux/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_scalapack_lp64 -lmkl_intel_thread -lmkl_core -Wl,--end-group -lpthread -lm -ldl"
 
 # ---------------------------------------------------------------------------- #
 # Algorithmic library connector                                                #

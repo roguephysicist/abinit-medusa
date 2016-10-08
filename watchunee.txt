@@ -15,7 +15,10 @@ watchu nee
 module load intel-compilers/16.2.181 intel-mpi/5.1.3.181 intel-mkl/16.2.181
 CC=""; CXX=""; FC=""; F77=""
 
+tar -xvf ../tarballs/abinit-7.10.5.tar.gz
+cd abinit-7.10.5
 sed -i -e 's/vec-report0/qopt-report=0/g' configure
+./configure
 time make multi multi_nprocs=8
 ../tests/runtests.py -j4 -n4 paral
 
