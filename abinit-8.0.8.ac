@@ -69,7 +69,7 @@ enable_64bit_flags="yes"
 #     * no       : do not apply any hint
 #     * yes      : apply all available hints
 #
-#enable_hints="no"
+enable_hints="yes"
 
 # Select optimization level whenever possible (default is standard,
 # except when debugging is in profile mode - see above - in which case
@@ -94,12 +94,11 @@ enable_optim="yes"
 
 # Disable vectorization with AVX-enable processor in problematic procedures
 #
-#enable_avx_safe_mode="yes"
+# enable_avx_safe_mode="yes"
 
 # Where to install ABINIT (default is /usr/local)
 #
-#prefix="${HOME}/hpc"
-prefix="/opt/science/bin/abinit-8.0.8-intel16.2.181"
+prefix="/opt/science/bin/abinit-8.0.8-intel16.2.181-MPI"
 
 # ---------------------------------------------------------------------------- #
 # C support                                                                    #
@@ -131,7 +130,6 @@ prefix="/opt/science/bin/abinit-8.0.8-intel16.2.181"
 # C compiler
 #
 #CC="gcc"
-CC="mpiicc"
 
 # C compiler custom debug flags (when enable_debug=yes)
 #
@@ -139,11 +137,11 @@ CC="mpiicc"
 
 # C compiler custom optimization flags (when enable_optim=yes)
 #
-CFLAGS_OPTIM="-O3"
+CFLAGS_OPTIM="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma"
 
 # C compiler additional custom flags
 #
-#CFLAGS_EXTRA="-O2"
+CFLAGS_EXTRA="-mkl=cluster"
 
 # Forced C compiler flags
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
@@ -216,7 +214,6 @@ CFLAGS_OPTIM="-O3"
 # C++ compiler
 #
 #CXX="g++"
-CXX="mpiicpc"
 
 # C++ compiler custom debug flags (when enable_debug=yes)
 #
@@ -224,11 +221,11 @@ CXX="mpiicpc"
 
 # C++ compiler custom optimization flags (when enable_optim=yes)
 #
-CXXFLAGS_OPTIM="-O3"
+CXXFLAGS_OPTIM="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma"
 
 # C++ compiler additional custom flags
 #
-#CXXFLAGS_EXTRA="-O2"
+CXXFLAGS_EXTRA="-mkl=cluster"
 
 # Forced C++ compiler flags
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
@@ -299,12 +296,10 @@ CXXFLAGS_OPTIM="-O3"
 # Fortran compiler
 #
 #FC="gfortran"
-FC="mpiifort"
 
 # Fortran 77 compiler (addition for the Windows/Cygwin environment)
 #
 #F77="gfortran"
-F77="mpiifort"
 
 # Fortran compiler custom debug flags (when enable_debug=yes)
 #
@@ -316,11 +311,11 @@ F77="mpiifort"
 
 # Fortran compiler custom optimization flags (when enable_optim=yes)
 #
-FCFLAGS_OPTIM="-O3"
+FCFLAGS_OPTIM="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma"
 
 # Fortran compiler additional custom flags
 #
-FCFLAGS_EXTRA="-mkl=parallel"
+FCFLAGS_EXTRA="-mkl=cluster"
 
 # Forced Fortran compiler flags
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
@@ -360,10 +355,6 @@ FCFLAGS_EXTRA="-mkl=parallel"
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
 #
 #FC_LIBS="-lsvml"
-
-# No optimization for group 43, greatly speeds up compiling
-#
-fcflags_opt_43_ptgroups="-g -O0"
 
                        # ------------------------------ #
 
@@ -408,6 +399,7 @@ enable_macroave="yes"
 # Note: this option is not available through the command line
 #
 #fcflags_opt_95_drive="-O0"
+fcflags_opt_43_ptgroups="-O0"
 
 # ---------------------------------------------------------------------------- #
 # Libraries and linking                                                        #
@@ -524,13 +516,12 @@ with_mpi_level="2"
 #     the MPI compiler wrappers are wrapped themselves, so that the
 #     specified serial compilers are used when building Abinit.
 #
-#with_mpi_prefix="/usr/local/openmpi-gcc"
+with_mpi_prefix="${I_MPI_ROOT}/intel64"
 
 # Set MPI runner for tests (default is unset)
 # Note: replaces the former with_mpi_runner option
 #
 #MPI_RUNNER="/usr/local/bin/mpiexec"
-MPI_RUNNER="mpiexec.hydra"
 
 # Set serial runner for tests (default is unset)
 # Note: this option has no effect yet
@@ -774,15 +765,15 @@ enable_connectors="yes"
 #   * By default, Abinit will use the internal Goedecker FFT library
 #   * This connector is highly experimental - USE AT YOUR OWN RISKS!
 #
-with_fft_flavor="fftw3"
+with_fft_flavor="fftw3-mkl"
 
 # Include flags for the FFT library (default is unset)
 #
-with_fft_incs="-I/opt/science/bin/fftw-3.3.5-intel16.2.181/include"
+#with_fft_incs="-I/usr/local/include/fftw"
 
 # Link flags for the FFT library (default is unset)
 #
-with_fft_libs="-L/opt/science/bin/fftw-3.3.5-intel16.2.181/lib -lfftw3 -lfftw3f -lfftw3_mpi -lfftw3f_mpi"
+#with_fft_libs="-L/usr/local/lib/fftw -lfftw3"
 
 # ---------------------------------------------------------------------------- #
 # Linear algebra connector                                                     #
@@ -861,12 +852,11 @@ with_linalg_flavor="mkl"
 
 # Include flags for the external linear algebra libraries (default is unset)
 #
-with_linalg_incs="-I/opt/intel/compilers_and_libraries_2016.2.181/linux/mkl/include"
+with_linalg_incs="-I${MKLROOT}/include"
 
 # Link flags for the external linear algebra libraries (default is unset)
 #
-# unused options: "-lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_sequential"
-with_linalg_libs="-L/opt/intel/compilers_and_libraries_2016.2.181/linux/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_scalapack_lp64 -lmkl_intel_thread -lmkl_core -Wl,--end-group -lpthread -lm -ldl"
+#with_linalg_libs="-L/usr/local/lib -llapack -lblas"
 
 # ---------------------------------------------------------------------------- #
 # Algorithmic library connector                                                #
@@ -1042,7 +1032,7 @@ enable_fallbacks="yes"
 
 # Enable double precision for GW calculations (gmatteo)
 #
-#enable_gw_dpc="yes"
+enable_gw_dpc="yes"
 
 # Enable memory profiling (waroquiers)
 #
