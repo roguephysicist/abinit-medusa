@@ -1,10 +1,11 @@
-Instructions for building ABINIT 7.10.5 and 8.0.8b on Medusa
+Instructions for building ABINIT on Medusa
 =======================================================
 
-This is a detailed guide for building ABINIT 7.10.5 and 8.0.8b. We will make
-extensive use of the Intel MPI and MKL libraries. This streamlines the process
-considerably; combined with processor-specific optimization, the resulting
-binaries are are extremely fast without sacrificing accuracy.
+This is a detailed guide for building highly optimized binaries for ABINIT on
+Medusa. We will make extensive use of the Intel MPI and MKL libraries. This
+streamlines the process considerably; combined with processor-specific
+optimization, the resulting binaries are are extremely fast without sacrificing
+accuracy.
 
 As the Intel MPI and MKL libraries are already installed and optimized for the
 system, we do not need to build any intermediate software. If you choose not to
@@ -17,11 +18,11 @@ Procedure
 -------------------------------------------------------
 
 We will use the adjoining `abinit-x.x.x.ac` configure files. Choose the
-appropriate one for your version. This file will greatly facilitate the build
-process as it contains all the correct build options and paths. Review this file
-carefully, as it contains a lot of useful information. If you wish to add more
-connectors or experiment with other options, I recommend doing so using this
-file as most of the variables are extensively documented.
+appropriate one for your version of ABINIT. This file will greatly facilitate
+the build process as it contains all the correct build options and paths. Review
+this file carefully, as it contains a lot of useful information. If you wish to
+add more connectors or experiment with other options, I recommend doing so using
+this file as most of the variables are extensively documented.
 
 **Typically, the only thing you will need to modify is the `prefix`. Set this to
 wherever you want to install ABINIT.**
