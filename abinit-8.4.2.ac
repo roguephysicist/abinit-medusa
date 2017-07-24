@@ -98,7 +98,7 @@ enable_optim="yes"
 
 # Where to install ABINIT (default is /usr/local)
 #
-prefix="/opt/science/bin/abinit-8.0.8-intel16.2.181-MPI"
+prefix="/opt/science/bin/abinit-8.4.2-intel16.2.181-MPI"
 
 # ---------------------------------------------------------------------------- #
 # C support                                                                    #
@@ -321,6 +321,22 @@ FCFLAGS_EXTRA="-mkl=cluster"
 # Note: will override build-system configuration - USE AT YOUR OWN RISKS!
 #
 #FCFLAGS="-O2"
+
+# Fortran flags for fixed-form source files
+#
+#FCFLAGS_FIXEDFORM="-ffixed-form"
+
+# Fortran flags for free-form source files
+#
+#FCFLAGS_FREEFORM="-ffree-form"
+
+# Fortran compiler flags to use a module directory
+#
+#FCFLAGS_MODDIR=="-J$(abinit_moddir)"
+
+# Tricky Fortran compiler flags
+#
+#FCFLAGS_HINTS="-ffree-line-length-none"
 
 # Fortran linker custom debug flags (when enable_debug=yes)
 #
@@ -676,14 +692,13 @@ enable_connectors="yes"
 # Transferable I/O (TRIO) connector                                            #
 # ---------------------------------------------------------------------------- #
 
-# Flavor of transferable I/O library to support (default is netcdf+etsf_io)
+# Flavor of transferable I/O library to support (default is netcdf)
 #
 # By transferable I/O (TRIO), we mean that the files produced by Abinit
 # will be transferable seamlessly to other computers and codes
 #
 # Supported libraries:
 #
-#   * etsf_io  : ETSF_IO file format (requires netcdf)
 #   * psml     : XML pseudopotential format io library
 #   * netcdf   : NetCDF file format
 #   * yaml     : YAML output
@@ -692,16 +707,6 @@ enable_connectors="yes"
 # You may specify any combination, using '+' as a separator
 #
 #with_trio_flavor="netcdf"
-
-                       # ------------------------------ #
-
-# Include flags for the ETSF_IO library (default is unset)
-#
-#with_etsf_io_incs="-I/opt/etsf/include"
-
-# Link flags for the ETSF_IO library (default is unset)
-#
-#with_etsf_io_libs="-L/opt/etsf/lib -letsf_io"
 
                        # ------------------------------ #
 
@@ -972,6 +977,14 @@ with_linalg_incs="-I${MKLROOT}/include"
 # Flag to force wannier90 v1.x (autodetected by default, but may not work)
 #
 #enable_wannier90_v1="no"
+
+# ---------------------------------------------------------------------------- #
+# LIBXML support
+# ---------------------------------------------------------------------------- #
+
+# Flag to enable LIBXML library
+#
+#enable_xml=no
 
 # ---------------------------------------------------------------------------- #
 # DMFT library connector                                                        #
