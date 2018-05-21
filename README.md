@@ -125,7 +125,7 @@ Summary of important options:
   * MPI-IO enabled  : yes
   * GPU    enabled  : no (flavor: none)
 
-  * TRIO   flavor = none
+  * TRIO   flavor = netcdf-fallback
   * TIMER  flavor = abinit (libs: ignored)
   * LINALG flavor = mkl (libs: auto-detected)
   * ALGO   flavor = none (libs: ignored)
@@ -148,8 +148,7 @@ take roughly 35 minutes on 8 cores.**
 ### Step 3 - Testing
 
 We must now test our new ABINIT binaries. Refer to the ABINIT
-[documentation]
-(http://www.abinit.org/doc/helpfiles/for-v8.0/install_notes/install.html#make_tests)
+[documentation](http://www.abinit.org/doc/helpfiles/for-v8.0/install_notes/install.html#make_tests)
 for more information on testing. In the same build directory, create a
 temporary directory for running the tests.
 
@@ -231,11 +230,9 @@ binaries will NOT function on processors that do not have these instructions,
 and will not likely work on any non-Intel processors. Obviously, these downsides
 are negligible compared to the tremendous gains in speed and precision that can
 be achieved with this level of optimization. However, please refer to the
-[official](https://software.intel.com/en-us/article
-s/performance-tools-for-software-developers-intel-compiler-options-for-sse-gener
-ation-and-processor-specific-optimizations) [documentation](https://software.int
-el.com/en-us/articles/performance-tools-for-software-developers-sse-generation-a
-nd-processor-specific-optimizations-continue) for details about these options.
+[official](https://software.intel.com/en-us/articles/performance-tools-for-software-developers-intel-compiler-options-for-sse-generation-and-processor-specific-optimizations)
+[documentation](https://software.intel.com/en-us/articles/performance-tools-for-software-developers-sse-generation-and-processor-specific-optimizations-continue)
+for details about these options.
 
 That being said, sometimes the software will not compile properly with these
 options, so you should always check these flags and rigorously test after each
