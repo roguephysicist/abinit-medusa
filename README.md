@@ -64,15 +64,21 @@ Check these and set them if not.
 If you do not have the Intel MKL, or simply want to link against your own FFTW library, you can configure with the following options:
 
 ```
-./configure --prefix=/opt/science/bin/fftw-3.3.5-intel16.2.181 CC=icc F77=ifort CPP='icpc -E' CFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" CPPFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" FFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" --enable-long-double
+./configure --prefix=/opt/science/bin/fftw-3.3.8-intel16.2.181 \
+    CC=icc F77=ifort CPP='icpc -E' CFLAGS=-O3 CPPFLAGS=-O3 FFLAGS=-O3 \
+    --enable-long-double
 ```
 
 ```
-./configure --prefix=/opt/science/bin/fftw-3.3.5-intel16.2.181 CC=icc F77=ifort CPP='icpc -E' CFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" CPPFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" FFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" --enable-openmp --enable-threads --enable-long-double
+./configure --prefix=/opt/science/bin/fftw-3.3.8-intel16.2.181 \
+    CC=icc F77=ifort CPP='icpc -E' CFLAGS=-O3 CPPFLAGS=-O3 FFLAGS=-O3 \
+    --enable-openmp --enable-threads --enable-long-double
 ```
 
 ```
-./configure --prefix=/opt/science/bin/fftw-3.3.5-intel16.2.181 CC=icc F77=ifort CPP='icpc -E' MPICC=mpiicc CFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" CPPFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" FFLAGS="-axCORE-AVX2,SSE4.2 -ip -static-intel -fp-model precise -fp-model source -fma" --enable-mpi --enable-long-double
+./configure --prefix=/opt/science/bin/fftw-3.3.8-intel16.2.181 \
+    CC=icc F77=ifort CPP='icpc -E' MPICC=mpiicc CFLAGS=-O3 CPPFLAGS=-O3 FFLAGS=-O3 \
+    --enable-mpi --enable-long-double
 ```
 
 ### Step 1 - Prepare the source code
