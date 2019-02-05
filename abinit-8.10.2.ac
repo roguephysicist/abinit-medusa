@@ -98,7 +98,7 @@ enable_optim="yes"
 
 # Where to install ABINIT (default is /usr/local)
 #
-prefix="/opt/science/bin/abinit-8.10.4"
+prefix="/opt/science/bin/abinit-8.10.2"
 
 # ---------------------------------------------------------------------------- #
 # C support                                                                    #
